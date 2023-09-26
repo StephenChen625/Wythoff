@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wythoff Game</title>
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(21, 60px);
+      grid-template-rows: repeat(11, 60px);
+      gap: 1px;
+    }
+
+    .square {
+      background-color: white;
+      border: 1px solid black;
+    }
+    .number {
+      position: relative;
+      top: 15px;
+      left: 10px;
+      transform: translate(-50%, -50%);
+      visibility: hidden; /* Hide the numbers initially */
+    }
+    .queen {
+      position: relative;
+      left: -23px;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: black;
+    }
+
+    .highlight {
+      background-color: lightyellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="square" data-row="10" data-col="0"><span class="number">(10,0)</span></div>
+ <div class="square" data-row="10" data-col="1"><span class="number">(10,1)</span></div>
+ <div class="square" data-row="10" data-col="2"><span class="number">(10,2)</span></div>
+ <div class="square" data-row="10" data-col="3"><span class="number">(10,3)</span></div>
+ <div class="square" data-row="10" data-col="4"><span class="number">(10,4)</span></div>
+ <div class="square" data-row="10" data-col="5"><span class="number">(10,5)</span></div>
+ <div class="square" data-row="10" data-col="6"><span class="number">(10,6)</span></div>
+ <div class="square" data-row="10" data-col="7"><span class="number">(10,7)</span></div>
+ <div class="square" data-row="10" data-col="8"><span class="number">(10,8)</span></div>
+ <div class="square" data-row="10" data-col="9"><span class="number">(10,9)</span></div>
+ <div class="square" data-row="10" data-col="10"><span class="number">(10,10)</span></div>
+ <div class="square" data-row="10" data-col="11"><span class="number">(10,11)</span></div>
+ <div class="square" data-row="10" data-col="12"><span class="number">(10,12)</span></div>
+ <div class="square" data-row="10" data-col="13"><span class="number">(10,13)</span></div>
+ <div class="square" data-row="10" data-col="14"><span class="number">(10,14)</span></div>
+ <div class="square" data-row="10" data-col="15"><span class="number">(10,15)</span></div>
+ <div class="square" data-row="10" data-col="16"><span class="number">(10,16)</span></div>
+ <div class="square" data-row="10" data-col="17"><span class="number">(10,17)</span></div>
+ <div class="square" data-row="10" data-col="18"><span class="number">(10,18)</span></div>
+ <div class="square" data-row="10" data-col="19"><span class="number">(10,19)</span></div>
+ <div class="square" data-row="10" data-col="20"><span class="number">(10,20)</span></div>
+ <div class="square" data-row="9" data-col="0"><span class="number">(9,0)</span></div>
+ <div class="square" data-row="9" data-col="1"><span class="number">(9,1)</span></div>
+ <div class="square" data-row="9" data-col="2"><span class="number">(9,2)</span></div>
+ <div class="square" data-row="9" data-col="3"><span class="number">(9,3)</span></div>
+ <div class="square" data-row="9" data-col="4"><span class="number">(9,4)</span></div>
+ <div class="square" data-row="9" data-col="5"><span class="number">(9,5)</span></div>
+ <div class="square" data-row="9" data-col="6"><span class="number">(9,6)</span></div>
+ <div class="square" data-row="9" data-col="7"><span class="number">(9,7)</span></div>
+ <div class="square" data-row="9" data-col="8"><span class="number">(9,8)</span></div>
+ <div class="square" data-row="9" data-col="9"><span class="number">(9,9)</span></div>
+ <div class="square" data-row="9" data-col="10"><span class="number">(9,10)</span></div>
+ <div class="square" data-row="9" data-col="11"><span class="number">(9,11)</span></div>
+ <div class="square" data-row="9" data-col="12"><span class="number">(9,12)</span></div>
+ <div class="square" data-row="9" data-col="13"><span class="number">(9,13)</span></div>
+ <div class="square" data-row="9" data-col="14"><span class="number">(9,14)</span></div>
+ <div class="square" data-row="9" data-col="15"><span class="number">(9,15)</span></div>
+ <div class="square" data-row="9" data-col="16"><span class="number">(9,16)</span></div>
+ <div class="square" data-row="9" data-col="17"><span class="number">(9,17)</span></div>
+ <div class="square" data-row="9" data-col="18"><span class="number">(9,18)</span></div>
+ <div class="square" data-row="9" data-col="19"><span class="number">(9,19)</span></div>
+ <div class="square" data-row="9" data-col="20"><span class="number">(9,20)</span></div>
+ <div class="square" data-row="8" data-col="0"><span class="number">(8,0)</span></div>
+ <div class="square" data-row="8" data-col="1"><span class="number">(8,1)</span></div>
+ <div class="square" data-row="8" data-col="2"><span class="number">(8,2)</span></div>
+ <div class="square" data-row="8" data-col="3"><span class="number">(8,3)</span></div>
+ <div class="square" data-row="8" data-col="4"><span class="number">(8,4)</span></div>
+ <div class="square" data-row="8" data-col="5"><span class="number">(8,5)</span></div>
+ <div class="square" data-row="8" data-col="6"><span class="number">(8,6)</span></div>
+ <div class="square" data-row="8" data-col="7"><span class="number">(8,7)</span></div>
+ <div class="square" data-row="8" data-col="8"><span class="number">(8,8)</span></div>
+ <div class="square" data-row="8" data-col="9"><span class="number">(8,9)</span></div>
+ <div class="square" data-row="8" data-col="10"><span class="number">(8,10)</span></div>
+ <div class="square" data-row="8" data-col="11"><span class="number">(8,11)</span></div>
+ <div class="square" data-row="8" data-col="12"><span class="number">(8,12)</span></div>
+ <div class="square" data-row="8" data-col="13"><span class="number">(8,13)</span></div>
+ <div class="square" data-row="8" data-col="14"><span class="number">(8,14)</span></div>
+ <div class="square" data-row="8" data-col="15"><span class="number">(8,15)</span></div>
+ <div class="square" data-row="8" data-col="16"><span class="number">(8,16)</span></div>
+ <div class="square" data-row="8" data-col="17"><span class="number">(8,17)</span></div>
+ <div class="square" data-row="8" data-col="18"><span class="number">(8,18)</span></div>
+ <div class="square" data-row="8" data-col="19"><span class="number">(8,19)</span></div>
+ <div class="square" data-row="8" data-col="20"><span class="number">(8,20)</span></div>
+ <div class="square" data-row="7" data-col="0"><span class="number">(7,0)</span></div>
+ <div class="square" data-row="7" data-col="1"><span class="number">(7,1)</span></div>
+ <div class="square" data-row="7" data-col="2"><span class="number">(7,2)</span></div>
+ <div class="square" data-row="7" data-col="3"><span class="number">(7,3)</span></div>
+ <div class="square" data-row="7" data-col="4"><span class="number">(7,4)</span></div>
+ <div class="square" data-row="7" data-col="5"><span class="number">(7,5)</span></div>
+ <div class="square" data-row="7" data-col="6"><span class="number">(7,6)</span></div>
+ <div class="square" data-row="7" data-col="7"><span class="number">(7,7)</span></div>
+ <div class="square" data-row="7" data-col="8"><span class="number">(7,8)</span></div>
+ <div class="square" data-row="7" data-col="9"><span class="number">(7,9)</span></div>
+ <div class="square" data-row="7" data-col="10"><span class="number">(7,10)</span></div>
+ <div class="square" data-row="7" data-col="11"><span class="number">(7,11)</span></div>
+ <div class="square" data-row="7" data-col="12"><span class="number">(7,12)</span></div>
+ <div class="square" data-row="7" data-col="13"><span class="number">(7,13)</span></div>
+ <div class="square" data-row="7" data-col="14"><span class="number">(7,14)</span></div>
+ <div class="square" data-row="7" data-col="15"><span class="number">(7,15)</span></div>
+ <div class="square" data-row="7" data-col="16"><span class="number">(7,16)</span></div>
+ <div class="square" data-row="7" data-col="17"><span class="number">(7,17)</span></div>
+ <div class="square" data-row="7" data-col="18"><span class="number">(7,18)</span></div>
+ <div class="square" data-row="7" data-col="19"><span class="number">(7,19)</span></div>
+ <div class="square" data-row="7" data-col="20"><span class="number">(7,20)</span></div>
+ <div class="square" data-row="6" data-col="0"><span class="number">(6,0)</span></div>
+ <div class="square" data-row="6" data-col="1"><span class="number">(6,1)</span></div>
+ <div class="square" data-row="6" data-col="2"><span class="number">(6,2)</span></div>
+ <div class="square" data-row="6" data-col="3"><span class="number">(6,3)</span></div>
+ <div class="square" data-row="6" data-col="4"><span class="number">(6,4)</span></div>
+ <div class="square" data-row="6" data-col="5"><span class="number">(6,5)</span></div>
+ <div class="square" data-row="6" data-col="6"><span class="number">(6,6)</span></div>
+ <div class="square" data-row="6" data-col="7"><span class="number">(6,7)</span></div>
+ <div class="square" data-row="6" data-col="8"><span class="number">(6,8)</span></div>
+ <div class="square" data-row="6" data-col="9"><span class="number">(6,9)</span></div>
+ <div class="square" data-row="6" data-col="10"><span class="number">(6,10)</span></div>
+ <div class="square" data-row="6" data-col="11"><span class="number">(6,11)</span></div>
+ <div class="square" data-row="6" data-col="12"><span class="number">(6,12)</span></div>
+ <div class="square" data-row="6" data-col="13"><span class="number">(6,13)</span></div>
+ <div class="square" data-row="6" data-col="14"><span class="number">(6,14)</span></div>
+ <div class="square" data-row="6" data-col="15"><span class="number">(6,15)</span></div>
+ <div class="square" data-row="6" data-col="16"><span class="number">(6,16)</span></div>
+ <div class="square" data-row="6" data-col="17"><span class="number">(6,17)</span></div>
+ <div class="square" data-row="6" data-col="18"><span class="number">(6,18)</span></div>
+ <div class="square" data-row="6" data-col="19"><span class="number">(6,19)</span></div>
+ <div class="square" data-row="6" data-col="20"><span class="number">(6,20)</span></div>
+ <div class="square" data-row="5" data-col="0"><span class="number">(5,0)</span></div>
+ <div class="square" data-row="5" data-col="1"><span class="number">(5,1)</span></div>
+ <div class="square" data-row="5" data-col="2"><span class="number">(5,2)</span></div>
+ <div class="square" data-row="5" data-col="3"><span class="number">(5,3)</span></div>
+ <div class="square" data-row="5" data-col="4"><span class="number">(5,4)</span></div>
+ <div class="square" data-row="5" data-col="5"><span class="number">(5,5)</span></div>
+ <div class="square" data-row="5" data-col="6"><span class="number">(5,6)</span></div>
+ <div class="square" data-row="5" data-col="7"><span class="number">(5,7)</span></div>
+ <div class="square" data-row="5" data-col="8"><span class="number">(5,8)</span></div>
+ <div class="square" data-row="5" data-col="9"><span class="number">(5,9)</span></div>
+ <div class="square" data-row="5" data-col="10"><span class="number">(5,10)</span></div>
+ <div class="square" data-row="5" data-col="11"><span class="number">(5,11)</span></div>
+ <div class="square" data-row="5" data-col="12"><span class="number">(5,12)</span></div>
+ <div class="square" data-row="5" data-col="13"><span class="number">(5,13)</span></div>
+ <div class="square" data-row="5" data-col="14"><span class="number">(5,14)</span></div>
+ <div class="square" data-row="5" data-col="15"><span class="number">(5,15)</span></div>
+ <div class="square" data-row="5" data-col="16"><span class="number">(5,16)</span></div>
+ <div class="square" data-row="5" data-col="17"><span class="number">(5,17)</span></div>
+ <div class="square" data-row="5" data-col="18"><span class="number">(5,18)</span></div>
+ <div class="square" data-row="5" data-col="19"><span class="number">(5,19)</span></div>
+ <div class="square" data-row="5" data-col="20"><span class="number">(5,20)</span></div>
+ <div class="square" data-row="4" data-col="0"><span class="number">(4,0)</span></div>
+ <div class="square" data-row="4" data-col="1"><span class="number">(4,1)</span></div>
+ <div class="square" data-row="4" data-col="2"><span class="number">(4,2)</span></div>
+ <div class="square" data-row="4" data-col="3"><span class="number">(4,3)</span></div>
+ <div class="square" data-row="4" data-col="4"><span class="number">(4,4)</span></div>
+ <div class="square" data-row="4" data-col="5"><span class="number">(4,5)</span></div>
+ <div class="square" data-row="4" data-col="6"><span class="number">(4,6)</span></div>
+ <div class="square" data-row="4" data-col="7"><span class="number">(4,7)</span></div>
+ <div class="square" data-row="4" data-col="8"><span class="number">(4,8)</span></div>
+ <div class="square" data-row="4" data-col="9"><span class="number">(4,9)</span></div>
+ <div class="square" data-row="4" data-col="10"><span class="number">(4,10)</span></div>
+ <div class="square" data-row="4" data-col="11"><span class="number">(4,11)</span></div>
+ <div class="square" data-row="4" data-col="12"><span class="number">(4,12)</span></div>
+ <div class="square" data-row="4" data-col="13"><span class="number">(4,13)</span></div>
+ <div class="square" data-row="4" data-col="14"><span class="number">(4,14)</span></div>
+ <div class="square" data-row="4" data-col="15"><span class="number">(4,15)</span></div>
+ <div class="square" data-row="4" data-col="16"><span class="number">(4,16)</span></div>
+ <div class="square" data-row="4" data-col="17"><span class="number">(4,17)</span></div>
+ <div class="square" data-row="4" data-col="18"><span class="number">(4,18)</span></div>
+ <div class="square" data-row="4" data-col="19"><span class="number">(4,19)</span></div>
+ <div class="square" data-row="4" data-col="20"><span class="number">(4,20)</span></div>
+ <div class="square" data-row="3" data-col="0"><span class="number">(3,0)</span></div>
+ <div class="square" data-row="3" data-col="1"><span class="number">(3,1)</span></div>
+ <div class="square" data-row="3" data-col="2"><span class="number">(3,2)</span></div>
+ <div class="square" data-row="3" data-col="3"><span class="number">(3,3)</span></div>
+ <div class="square" data-row="3" data-col="4"><span class="number">(3,4)</span></div>
+ <div class="square" data-row="3" data-col="5"><span class="number">(3,5)</span></div>
+ <div class="square" data-row="3" data-col="6"><span class="number">(3,6)</span></div>
+ <div class="square" data-row="3" data-col="7"><span class="number">(3,7)</span></div>
+ <div class="square" data-row="3" data-col="8"><span class="number">(3,8)</span></div>
+ <div class="square" data-row="3" data-col="9"><span class="number">(3,9)</span></div>
+ <div class="square" data-row="3" data-col="10"><span class="number">(3,10)</span></div>
+ <div class="square" data-row="3" data-col="11"><span class="number">(3,11)</span></div>
+ <div class="square" data-row="3" data-col="12"><span class="number">(3,12)</span></div>
+ <div class="square" data-row="3" data-col="13"><span class="number">(3,13)</span></div>
+ <div class="square" data-row="3" data-col="14"><span class="number">(3,14)</span></div>
+ <div class="square" data-row="3" data-col="15"><span class="number">(3,15)</span></div>
+ <div class="square" data-row="3" data-col="16"><span class="number">(3,16)</span></div>
+ <div class="square" data-row="3" data-col="17"><span class="number">(3,17)</span></div>
+ <div class="square" data-row="3" data-col="18"><span class="number">(3,18)</span></div>
+ <div class="square" data-row="3" data-col="19"><span class="number">(3,19)</span></div>
+ <div class="square" data-row="3" data-col="20"><span class="number">(3,20)</span></div>
+ <div class="square" data-row="2" data-col="0"><span class="number">(2,0)</span></div>
+ <div class="square" data-row="2" data-col="1"><span class="number">(2,1)</span></div>
+ <div class="square" data-row="2" data-col="2"><span class="number">(2,2)</span></div>
+ <div class="square" data-row="2" data-col="3"><span class="number">(2,3)</span></div>
+ <div class="square" data-row="2" data-col="4"><span class="number">(2,4)</span></div>
+ <div class="square" data-row="2" data-col="5"><span class="number">(2,5)</span></div>
+ <div class="square" data-row="2" data-col="6"><span class="number">(2,6)</span></div>
+ <div class="square" data-row="2" data-col="7"><span class="number">(2,7)</span></div>
+ <div class="square" data-row="2" data-col="8"><span class="number">(2,8)</span></div>
+ <div class="square" data-row="2" data-col="9"><span class="number">(2,9)</span></div>
+ <div class="square" data-row="2" data-col="10"><span class="number">(2,10)</span></div>
+ <div class="square" data-row="2" data-col="11"><span class="number">(2,11)</span></div>
+ <div class="square" data-row="2" data-col="12"><span class="number">(2,12)</span></div>
+ <div class="square" data-row="2" data-col="13"><span class="number">(2,13)</span></div>
+ <div class="square" data-row="2" data-col="14"><span class="number">(2,14)</span></div>
+ <div class="square" data-row="2" data-col="15"><span class="number">(2,15)</span></div>
+ <div class="square" data-row="2" data-col="16"><span class="number">(2,16)</span></div>
+ <div class="square" data-row="2" data-col="17"><span class="number">(2,17)</span></div>
+ <div class="square" data-row="2" data-col="18"><span class="number">(2,18)</span></div>
+ <div class="square" data-row="2" data-col="19"><span class="number">(2,19)</span></div>
+ <div class="square" data-row="2" data-col="20"><span class="number">(2,20)</span></div>
+ <div class="square" data-row="1" data-col="0"><span class="number">(1,0)</span></div>
+ <div class="square" data-row="1" data-col="1"><span class="number">(1,1)</span></div>
+ <div class="square" data-row="1" data-col="2"><span class="number">(1,2)</span></div>
+ <div class="square" data-row="1" data-col="3"><span class="number">(1,3)</span></div>
+ <div class="square" data-row="1" data-col="4"><span class="number">(1,4)</span></div>
+ <div class="square" data-row="1" data-col="5"><span class="number">(1,5)</span></div>
+ <div class="square" data-row="1" data-col="6"><span class="number">(1,6)</span></div>
+ <div class="square" data-row="1" data-col="7"><span class="number">(1,7)</span></div>
+ <div class="square" data-row="1" data-col="8"><span class="number">(1,8)</span></div>
+ <div class="square" data-row="1" data-col="9"><span class="number">(1,9)</span></div>
+ <div class="square" data-row="1" data-col="10"><span class="number">(1,10)</span></div>
+ <div class="square" data-row="1" data-col="11"><span class="number">(1,11)</span></div>
+ <div class="square" data-row="1" data-col="12"><span class="number">(1,12)</span></div>
+ <div class="square" data-row="1" data-col="13"><span class="number">(1,13)</span></div>
+ <div class="square" data-row="1" data-col="14"><span class="number">(1,14)</span></div>
+ <div class="square" data-row="1" data-col="15"><span class="number">(1,15)</span></div>
+ <div class="square" data-row="1" data-col="16"><span class="number">(1,16)</span></div>
+ <div class="square" data-row="1" data-col="17"><span class="number">(1,17)</span></div>
+ <div class="square" data-row="1" data-col="18"><span class="number">(1,18)</span></div>
+ <div class="square" data-row="1" data-col="19"><span class="number">(1,19)</span></div>
+ <div class="square" data-row="1" data-col="20"><span class="number">(1,20)</span></div>
+ <div class="square" data-row="0" data-col="0"><span class="number">(0,0)</span></div>
+ <div class="square" data-row="0" data-col="1"><span class="number">(0,1)</span></div>
+ <div class="square" data-row="0" data-col="2"><span class="number">(0,2)</span></div>
+ <div class="square" data-row="0" data-col="3"><span class="number">(0,3)</span></div>
+ <div class="square" data-row="0" data-col="4"><span class="number">(0,4)</span></div>
+ <div class="square" data-row="0" data-col="5"><span class="number">(0,5)</span></div>
+ <div class="square" data-row="0" data-col="6"><span class="number">(0,6)</span></div>
+ <div class="square" data-row="0" data-col="7"><span class="number">(0,7)</span></div>
+ <div class="square" data-row="0" data-col="8"><span class="number">(0,8)</span></div>
+ <div class="square" data-row="0" data-col="9"><span class="number">(0,9)</span></div>
+ <div class="square" data-row="0" data-col="10"><span class="number">(0,10)</span></div>
+ <div class="square" data-row="0" data-col="11"><span class="number">(0,11)</span></div>
+ <div class="square" data-row="0" data-col="12"><span class="number">(0,12)</span></div>
+ <div class="square" data-row="0" data-col="13"><span class="number">(0,13)</span></div>
+ <div class="square" data-row="0" data-col="14"><span class="number">(0,14)</span></div>
+ <div class="square" data-row="0" data-col="15"><span class="number">(0,15)</span></div>
+ <div class="square" data-row="0" data-col="16"><span class="number">(0,16)</span></div>
+ <div class="square" data-row="0" data-col="17"><span class="number">(0,17)</span></div>
+ <div class="square" data-row="0" data-col="18"><span class="number">(0,18)</span></div>
+ <div class="square" data-row="0" data-col="19"><span class="number">(0,19)</span></div>
+ <div class="square" data-row="0" data-col="20"><span class="number">(0,20)</span></div>
+    
+    <!-- Repeat the above divs for rows 2 to 8 -->
+    <button id="toggleButton">Toggle Numbers</button>
+    <button id="modeButton">Toggle Mode</button>
+  </div>
+
+  <script>
+    var toggleButton = document.getElementById('toggleButton');
+    var numbersVisible = false;
+
+    toggleButton.addEventListener('click', function() {
+      var numbers = document.querySelectorAll('.number');
+      if (numbersVisible) {
+        numbers.forEach(function(number) {
+          number.style.visibility = 'hidden';
+        });
+      } else {
+        numbers.forEach(function(number) {
+          number.style.visibility = 'visible';
+        });
+      }
+      numbersVisible = !numbersVisible;
+    });
+
+    var modeButton = document.getElementById('modeButton');
+    var mode = 2;
+    modeButton.addEventListener('click', function() {
+      if (mode === 1) {
+        mode = 2;
+      } else {
+        mode = 1;
+      }
+    });
+
+    // Add event listener for 鼠标移动到上面
+    // Add event listener for 鼠标移动到上面
+    document.addEventListener('mouseover', function(event) {
+    if (event.button === 0 && mode == 2) { // Left mouse button
+        var target = event.target;
+        if (target.classList.contains('square')) {
+        var row = target.getAttribute('data-row');
+        var col = target.getAttribute('data-col');
+        var squares = document.querySelectorAll('.square');
+        squares.forEach(function(square) {
+            var squareRow = parseInt(square.getAttribute('data-row'));
+            var squareCol = parseInt(square.getAttribute('data-col'));
+            if ((squareRow <= row && squareCol == col) || (squareCol <= col &&squareRow == row) || (squareRow-squareCol == row- col && squareRow <= row &&squareCol <= col)) {
+            square.classList.add('highlight');
+            }
+        });
+        }
+    }
+    });
+
+    // Add event listener for 鼠标移出
+    document.addEventListener('mouseout', function(event) {
+    var target = event.target;
+    if (target.classList.contains('square') && mode == 2) {
+        var squares = document.querySelectorAll('.square');
+        squares.forEach(function(square) {
+        square.classList.remove('highlight');
+        });
+    }
+    });
+    // Add event listener for left mouse button click
+    document.addEventListener('click', function(event) {
+      if (event.button === 0) { // Left mouse button
+        var target = event.target;
+        if (target.classList.contains('square')) {
+          var row = target.getAttribute('data-row');
+          var col = target.getAttribute('data-col');
+          var squares = document.querySelectorAll('.square');
+          for (var i = 0; i < squares.length; i++) {
+            var squareRow = parseInt(squares[i].getAttribute('data-row'));
+            var squareCol = parseInt(squares[i].getAttribute('data-col'));
+            if (mode === 1){
+            if ((squareRow >= row && squareCol == col) || (squareCol >= col &&squareRow == row) || (squareRow-squareCol == row- col && squareRow >= row &&squareCol >= col)) {
+              squares[i].style.backgroundColor = 'lightpink';
+            }}
+            if (mode === 2){
+            if (squareRow == row && squareCol == col)  {
+              squares[i].style.backgroundColor = 'lightpink';
+            }}
+          }
+        }
+      }
+    });
+ 
+    // Add event listener for right mouse button click
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault(); // Prevent default context menu
+      var target = event.target;
+      if (target.classList.contains('square')) {
+        target.style.backgroundColor = 'lightblue';
+      }
+    });
+  </script>
+</body>
+</html>
